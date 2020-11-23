@@ -74,6 +74,7 @@ exports.findAndCountAll = (req, res) => {
   {
     [Op.or]: [
       {products_name: { [Op.like]: `%${search_keyword}%`} }, 
+      {products_name_en: { [Op.like]: `%${search_keyword}%`} }, 
       {products_id: { [Op.like]: `%${search_keyword}%`} },
     ],
     [Op.and]: [
@@ -81,6 +82,7 @@ exports.findAndCountAll = (req, res) => {
       search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
       usvn_longtieng>-1?{products_ngonngu: { [Op.eq]: `${usvn_longtieng}`} }:null,
       search_abc.length===1?{products_name: { [Op.like]: `${search_abc}%`} }:null,
+      search_abc.length===1?{products_name_en: { [Op.like]: `${search_abc}%`} }:null,
     ]
   } : 
   {
@@ -140,6 +142,7 @@ exports.create = (req, res) => {
   // Create a Product
   const newProduct = {
     products_name: req.body.products_name,
+    products_name_en: req.body.products_name_en,
     products_image: req.body.products_image,
     products_price: req.body.products_price,
     products_soluong: req.body.products_soluong,
@@ -178,6 +181,7 @@ exports.findAll = (req, res) => {
     {
       [Op.or]: [
         {products_name: { [Op.like]: `%${search_keyword}%`} }, 
+        {products_name_en: { [Op.like]: `%${search_keyword}%`} }, 
         {products_id: { [Op.like]: `%${search_keyword}%`} }]
     } : null;
 

@@ -10,6 +10,9 @@ module.exports = (sequelize, Sequelize) => {
       products_name: {
         type: Sequelize.STRING
       },
+      products_name_en: {
+        type: Sequelize.STRING
+      },
       categories_id: {
         type: Sequelize.INTEGER
       },
@@ -17,6 +20,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER
       },
       products_image: {
+        type: Sequelize.STRING
+      },
+      products_image_large: {
         type: Sequelize.STRING
       },
       products_price: {
