@@ -26,6 +26,7 @@ db.categories = require("./categoryModel.js")(sequelize, Sequelize);
 db.customers = require("./customerModel.js")(sequelize, Sequelize);
 db.orders = require("./orderModel.js")(sequelize, Sequelize);
 db.orderdetail = require("./orderDetailModel.js")(sequelize, Sequelize);
+// da chinh orderdetail thanh orderDetail
 
 db.orders.hasMany(db.orderdetail, {
   foreignKey: 'ordersdetail_ordersid'
