@@ -1,9 +1,11 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "",
-  DB: "thekysto_data",
-  dialect: "mysql",
+  // de trong .env
+  // HOST: "localhost",   
+  // USER: "admin",
+  // PASSWORD: "8_Xaloxalac",
+  // DB: "thekystoredataaws",
+  // HOST: "thekystoredata.czrowfskgvge.us-east-2.rds.amazonaws.com",
+  // dialect: "mysql",
   pool: {
     max: 5,
     min: 0,
