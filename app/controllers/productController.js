@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 // Retrieve all products only by ABC  from the database and count All
 exports.findABCAndCountAll = (req, res) => {
   console.log('hihihi we are here product ABC and more ... ');
-  let limit = 18;   // number of records per page
+  let limit = 20;   // number of records per page
   let offset = 0;
 
   // chuyen thanh keyword noi chung, khong con tim theo NAME ma thoi
@@ -52,7 +52,7 @@ exports.findABCAndCountAll = (req, res) => {
 // Retrieve all products by condition (search, retail, longtieng, category) from the database and count All
 exports.findAndCountAll = (req, res) => {
   console.log('hihihi we are here product count alllllllllllllllll');
-  let limit = 18;   // number of records per page
+  let limit = 20;   // number of records per page
   let offset = 0;
   
 
