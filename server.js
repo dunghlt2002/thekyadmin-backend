@@ -29,7 +29,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to ThekKyStore application." });
+  res.json({ message: "Welcome "  + corsOptions.origin});
 });
 
 app.use(function (req, res, next) {
