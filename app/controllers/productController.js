@@ -51,7 +51,7 @@ exports.findABCAndCountAll = (req, res) => {
 
 // Retrieve all products by condition (search, retail, longtieng, category) from the database and count All
 exports.findAndCountAll = (req, res) => {
-  console.log('hihihi we are here product count all');
+  console.log('hihihi we are here product count alllllllllllllllll');
   let limit = 18;   // number of records per page
   let offset = 0;
   
