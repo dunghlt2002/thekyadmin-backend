@@ -151,6 +151,7 @@ app.post('/send', (req, res, next) => {
 })
 
 require("./app/routes/categoryRoutes")(app);
+require("./app/routes/providerRoutes")(app);
 require("./app/routes/productRoutes")(app);
 require("./app/routes/customerRoutes")(app);
 require("./app/routes/orderRoutes")(app);
