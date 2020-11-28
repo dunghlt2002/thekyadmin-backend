@@ -5,7 +5,7 @@ module.exports = app => {
   const providers = require("../controllers/providerController.js");
 
   // Create a new Tutorial
-  router.post("/providers", providers.create);
+  // router.post("/providers", providers.create);
   
   // Retrieve all products
   router.get("/providers", providers.findAll);
@@ -20,10 +20,10 @@ module.exports = app => {
   router.get("/providers/:providers_id", providers.findOne);
 
   // Update a Tutorial with id
-  router.put("/providers/:providers_id", providers.update);
+  // router.put("/providers/:providers_id", providers.update);
   
   // Delete a Tutorial with id
-  router.delete("/providers/:providers_id", providers.delete);
+  // router.delete("/providers/:providers_id", providers.delete);
  
   app.use('/api', router);
 };
