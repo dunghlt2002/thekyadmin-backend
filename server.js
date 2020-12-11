@@ -156,6 +156,7 @@ require("./app/routes/productRoutes")(app);
 require("./app/routes/customerRoutes")(app);
 require("./app/routes/orderRoutes")(app);
 require("./app/routes/userRoutes")(app);
+require("./app/routes/us_statesRoutes")(app);
 
 
 // set port, listen for requests

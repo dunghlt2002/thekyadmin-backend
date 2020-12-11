@@ -20,10 +20,10 @@ module.exports = app => {
   router.get("/categories/:categories_id", categories.findOne);
 
   // Update a Tutorial with id
-  router.put("/categories/:categories_id", categories.update);
+  // router.put("/categories/:categories_id", categories.update);
   
   // Delete a Tutorial with id
-  router.delete("/categories/:categories_id", categories.delete);
+  // router.delete("/categories/:categories_id", categories.delete);
  
   app.use('/api', router);
 };

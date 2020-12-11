@@ -17,11 +17,11 @@ app.use(express.json()); app.post('/send', (req, res, next) => {
     transporter.sendMail(mail, (err, data) => {
       if (err) {
         res.json({
-          msg: 'fail'
+          msg: 'your mail was fail...'
         })
       } else {
         res.json({
-          msg: 'success'
+          msg: 'your mail was success...'
         })
       }
     })

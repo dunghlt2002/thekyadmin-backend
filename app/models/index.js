@@ -28,6 +28,7 @@ db.providers = require("./providerModel.js")(sequelize, Sequelize);
 db.customers = require("./customerModel.js")(sequelize, Sequelize);
 db.orders = require("./orderModel.js")(sequelize, Sequelize);
 db.orderdetail = require("./orderdetailModel.js")(sequelize, Sequelize);
+db.us_states = require("./us_statesModel.js")(sequelize, Sequelize);
 
 
 db.orders.hasMany(db.orderdetail, {
