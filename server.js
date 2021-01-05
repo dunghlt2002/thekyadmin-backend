@@ -29,8 +29,13 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome "  + corsOptions.origin});
+  res.json({ message: "Welcome "  + corsOptions.origin + ' at ' + process.env.PAYPAL_CLIENT_ID });
 });
+
+app.get('/api/config/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
+})
+
 
 app.use(function (req, res, next) {
   console.log('head '+ req.headers.authorization);
@@ -127,13 +132,14 @@ app.post('/send', (req, res, next) => {
   const name = req.body.name
   const email = req.body.email
   const message = req.body.messageHtml
+  const subject = req.body.subject
 
 
   var mail = {
     from: name,
     to: email,  
-    subject: 'New user has created in thekystore.com',
-
+    subject: subject,
+    // subject: 'Message from www.thekystore.com',
     html: message
   }
 
@@ -150,6 +156,8 @@ app.post('/send', (req, res, next) => {
   })
 })
 
+
+
 require("./app/routes/categoryRoutes")(app);
 require("./app/routes/providerRoutes")(app);
 require("./app/routes/productRoutes")(app);
@@ -157,6 +165,7 @@ require("./app/routes/customerRoutes")(app);
 require("./app/routes/orderRoutes")(app);
 require("./app/routes/userRoutes")(app);
 require("./app/routes/us_statesRoutes")(app);
+require("./app/routes/systemparaRoutes")(app);
 
 
 // set port, listen for requests
@@ -167,3 +176,23 @@ app.listen(PORT, () => {
 
 
 // CLIENT_URL = https://thekystorefrontend.herokuapp.com/
+
+
+// JWT_SECRET = '123dung'
+// DB_NAME = thekystoredataaws
+// DB_HOST = thekystoredata.czrowfskgvge.us-east-2.rds.amazonaws.com
+// DB_USER = admin
+// DB_PASSWORD = 8_Xaloxalac
+// DB_DIALECT = mysql
+// CLIENT_URL = http://localhost:8081
+// PAYPAL_CLIENT_ID=Ae8ecvWcccCP2AiMCTYOrpvYadfKIpfColSPDCw5oGcWICKw8Crc9NDjxwM1MTvFZW2KOdQuSuRnK1me
+
+
+// JWT_SECRET = '123dung'
+// DB_NAME = thekystoredata
+// DB_HOST = localhost
+// DB_USER = root
+// DB_PASSWORD = 
+// DB_DIALECT = mysql
+// CLIENT_URL = http://localhost:8081
+// PAYPAL_CLIENT_ID=Ae8ecvWcccCP2AiMCTYOrpvYadfKIpfColSPDCw5oGcWICKw8Crc9NDjxwM1MTvFZW2KOdQuSuRnK1me

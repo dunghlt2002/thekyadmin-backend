@@ -20,6 +20,8 @@ exports.signin = async (req, res) => {
           res.send({
               id: customerSelect.id,
               customers_email: customerSelect.customers_email,
+              customers_name: customerSelect.customers_name,
+              chutcheo_city: customerSelect.chutcheo_city,
               token: utils.generateToken(customerSelect)
           });
           console.log('data return trong backend ' + customerSelect.customers_email);
@@ -51,6 +53,7 @@ exports.create = (req, res) => {
     customers_zip: req.body.customers_zip,
     customers_state: req.body.customers_state,
     customers_country: req.body.customers_country,
+    customers_phone: req.body.customers_phone,
   };
 
   // Save Customer in the database

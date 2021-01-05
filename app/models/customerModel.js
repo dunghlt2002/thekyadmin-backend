@@ -33,6 +33,12 @@ module.exports = (sequelize, Sequelize) => {
       },
       custadv: {
         type: Sequelize.BOOLEAN
+      },
+      customers_phone: {
+        type: Sequelize.STRING
+      },
+      chutcheo_city: {
+        type: Sequelize.BOOLEAN
       }
     }
     , 

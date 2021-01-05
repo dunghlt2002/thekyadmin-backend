@@ -25,7 +25,9 @@ module.exports = app => {
     router.get("/customers", customers.findAll);
 
     // Retrieve all customers paginition
-    router.get("/customers/:currentPage", customers.findAndCountAll);
+    // router.get("/users/:currentPage", [authJwt.verifyToken], users.findAndCountAll);
+    // router.get("/customers/:currentPage", customers.findAndCountAll);
+    router.get("/customers/:currentPage", [authJwt.verifyToken], customers.findAndCountAll);
 
     // Retrieve a single Customer with id
     router.get("/customer/:customers_id", customers.findOne);

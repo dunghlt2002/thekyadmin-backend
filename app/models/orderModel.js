@@ -47,8 +47,26 @@ module.exports = (sequelize, Sequelize) => {
       tax: {
         type: Sequelize.DECIMAL
       },
+      orders_promotion: {
+        type: Sequelize.STRING
+      },
       discount: {
         type: Sequelize.DECIMAL
+      },
+      grand_amount: {
+        type: Sequelize.DECIMAL
+      },
+      payment_id: {
+        type: Sequelize.STRING
+      },
+      payment_update_time: {
+        type: Sequelize.STRING
+      },
+      payment_status: {
+        type: Sequelize.STRING
+      },
+      payment_email: {
+        type: Sequelize.STRING
       },
       orders_des: {
         type: Sequelize.STRING

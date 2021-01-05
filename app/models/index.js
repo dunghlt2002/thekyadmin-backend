@@ -19,16 +19,18 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-
+// hinh nhu khong can user_data nua 12282020 - xai chung voi customer luon
 db.user_data = require("./userModel.js")(sequelize, Sequelize);
+
 db.products = require("./productModel.js")(sequelize, Sequelize);
 db.categories = require("./categoryModel.js")(sequelize, Sequelize);
+db.us_states = require("./us_statesModel.js")(sequelize, Sequelize);
+db.systempara = require("./systemparaModel.js")(sequelize, Sequelize);
 db.providers = require("./providerModel.js")(sequelize, Sequelize);
 db.providers = require("./providerModel.js")(sequelize, Sequelize);
 db.customers = require("./customerModel.js")(sequelize, Sequelize);
 db.orders = require("./orderModel.js")(sequelize, Sequelize);
 db.orderdetail = require("./orderdetailModel.js")(sequelize, Sequelize);
-db.us_states = require("./us_statesModel.js")(sequelize, Sequelize);
 
 
 db.orders.hasMany(db.orderdetail, {
