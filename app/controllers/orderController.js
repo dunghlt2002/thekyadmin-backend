@@ -135,17 +135,26 @@ exports.findAll = (req, res) => {
 
   // chuyen thanh keyword noi chung, khong con tim theo NAME ma thoi
   const search_keyword = req.query.search_keyword;
+  const status = req.params.status;
+  console.log('find ALL orderssss by status: ' + status + ' keyword ' + search_keyword);
 
-
-  //customer.customers_name
   var condition = search_keyword ? 
   {
     [Op.or]: [
       {name: { [Op.like]: `%${search_keyword}%`} }, 
       {orders_id: { [Op.like]: `%${search_keyword}%`} },
       {orders_customer_id: { [Op.like]: `%${search_keyword}%`} }
+    ],
+    [Op.and]: [
+      {orders_status: { [Op.eq]: `${status}`} }
     ]
-  } : null;
+  } : 
+  {
+      [Op.and]: [
+      {orders_status: { [Op.eq]: `${status}`} }
+      ]
+  }
+  ;
 
   // Dong include cuc ky quan trong nhe
   // Level 1
@@ -188,14 +197,19 @@ exports.findAllByCustomer = (req, res) => {
   
     // chuyen thanh keyword noi chung, khong con tim theo NAME ma thoi
   // const search_keyword = req.query.search_keyword;
-  console.log('find orderssss by customer ID');
-  const customer_id = req.params.customer_id;
-
+  console.log('find orderssss by customer ID  ' + req.params.customer_id);
+  const customer_id = req.params.customer_id_status.split('-')[0];
+  const status = req.params.customer_id_status.split('-')[1];
+  console.log('find orderssss by customer ID  ' + customer_id);
+  console.log('find orderssss by status  ' + status);
   //customer.customers_id
   var condition = customer_id ? 
   {
     [Op.or]: [
       {orders_customer_id: { [Op.eq]: `${customer_id}`} }
+    ],
+    [Op.and]: [
+      {orders_status: { [Op.eq]: `${status}`} }
     ]
   } : null;
 

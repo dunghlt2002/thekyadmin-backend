@@ -6,13 +6,14 @@ module.exports = app => {
   
 
     // Retrieve all
-    router.get("/orders", orders.findAll);
+    // router.get("/orders", orders.findAll);
+    router.get("/orders/:status", orders.findAll);
 
     // Retrieve all by customerID
-    router.get("/ordersbycustomer/:customer_id", orders.findAllByCustomer);
+    router.get("/ordersbycustomer/:customer_id_status", orders.findAllByCustomer);
     
-    // Retrieve a single
-    router.get("/orders/:orders_id", orders.findOne);
+    // Retrieve a single (order khong co chu S phia sau)
+    router.get("/order/:orders_id", orders.findOne);
 
     // Create a new 12/18/2020
     router.post("/orders", orders.create);

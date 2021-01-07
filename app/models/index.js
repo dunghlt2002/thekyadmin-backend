@@ -27,7 +27,7 @@ db.categories = require("./categoryModel.js")(sequelize, Sequelize);
 db.us_states = require("./us_statesModel.js")(sequelize, Sequelize);
 db.systempara = require("./systemparaModel.js")(sequelize, Sequelize);
 db.providers = require("./providerModel.js")(sequelize, Sequelize);
-db.providers = require("./providerModel.js")(sequelize, Sequelize);
+db.categories = require("./categoryModel.js")(sequelize, Sequelize);
 db.customers = require("./customerModel.js")(sequelize, Sequelize);
 db.orders = require("./orderModel.js")(sequelize, Sequelize);
 db.orderdetail = require("./orderdetailModel.js")(sequelize, Sequelize);
@@ -40,13 +40,6 @@ db.orderdetail.belongsTo(db.orders, {
   foreignKey: 'ordersdetail_ordersid'
 });
 
-db.products.hasMany(db.orderdetail, {
-  foreignKey: 'ordersdetail_product_id'
-});
-db.orderdetail.belongsTo(db.products, {
-  foreignKey: 'ordersdetail_product_id'
-});
-
 //orders_customer_id
 db.customers.hasMany(db.orders, {
   foreignKey: 'orders_customer_id'
@@ -55,5 +48,27 @@ db.orders.belongsTo(db.customers, {
   foreignKey: 'orders_customer_id'
 });
 
+db.products.hasMany(db.orderdetail, {
+  foreignKey: 'ordersdetail_product_id'
+});
+db.orderdetail.belongsTo(db.products, {
+  foreignKey: 'ordersdetail_product_id'
+});
+
+// Relation between categories & products
+db.categories.hasMany(db.products, {
+  foreignKey: 'categories_id'
+});
+db.products.belongsTo(db.categories, {
+  foreignKey: 'categories_id'
+});
+
+// Relation between providers & products
+db.providers.hasMany(db.products, {
+  foreignKey: 'providers_id'
+});
+db.products.belongsTo(db.providers, {
+  foreignKey: 'providers_id'
+});
 
 module.exports = db;

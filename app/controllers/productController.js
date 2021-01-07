@@ -96,19 +96,44 @@ exports.findAndCountAll = (req, res) => {
 
   console.log('dk ne: ' + JSON.stringify(condition));
 
-  Product.findAndCountAll({ where: condition })
+  // Order.findAll({
+  //   where: condition, 
+  //   order: [['orders_id', 'DESC']], 
+    // include: [
+    //   {model: db.orderdetail, include: [{model: db.products}]},
+    //   {model: db.customers} 
+    // ],
+    // nest:false
+  // })
+
+  Product.findAndCountAll({ 
+    where: condition,
+    include: [
+      {model: db.categories},
+      {model: db.providers}
+    ],
+    nest:false
+  })
     .then(data => {
       let page = req.params.currentPage;      // page number
       
       let pages = Math.ceil(data.count / limit);
       offset = limit * (page - 1);
       // res.send(data);
-      Product.findAll({ where: condition ,limit: limit,offset: offset})
+      Product.findAll({
+        where: condition,
+        include: [
+          {model: db.categories},
+          {model: db.providers}
+        ],
+        nest:false,
+        limit: limit,
+        offset: offset
+      })
       .then(data => {
         // const response = getPagingData(data, page, limit);
         console.log('a: ' + data[0].id);
         console.log('a: ' + data[0].products_name);
-        
         res.send({'data': data, 'pages': pages});
         
       })
