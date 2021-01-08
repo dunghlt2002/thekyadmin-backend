@@ -60,11 +60,13 @@ exports.findAndCountAll = (req, res) => {
   const search_keyword = req.query.search_keyword;
   var search_abc = req.query.search_abc;
   var search_category = req.query.search_category;
+  var search_provider = req.query.search_provider;
   var search_retail = req.query.search_retail;
   var usvn_longtieng = req.query.usvn_longtieng;
   
 
   console.log('keyword : ' + search_keyword);
+  console.log('search_provider : ' + search_provider);
   console.log('cat : ' + search_category);
   console.log('retail : ' + search_retail);
   console.log('Lng tieng : ' + usvn_longtieng);
@@ -75,11 +77,11 @@ exports.findAndCountAll = (req, res) => {
     [Op.or]: [
       {products_name: { [Op.like]: `%${search_keyword}%`} }, 
       {products_name_en: { [Op.like]: `%${search_keyword}%`} }, 
-      {products_id: { [Op.like]: `%${search_keyword}%`} },
     ],
     [Op.and]: [
       search_retail>-1?{products_retail: { [Op.eq]: `${search_retail}`} }:null,
       search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
+      search_provider>-1?{providers_id: { [Op.eq]: `${search_provider}`} }:null,
       usvn_longtieng>-1?{products_ngonngu: { [Op.eq]: `${usvn_longtieng}`} }:null,
       search_abc.length===1?{products_name: { [Op.like]: `${search_abc}%`} }:null,
       search_abc.length===1?{products_name_en: { [Op.like]: `${search_abc}%`} }:null,
@@ -89,6 +91,7 @@ exports.findAndCountAll = (req, res) => {
     [Op.and]: [
       search_retail>-1?{products_retail: { [Op.eq]: `${search_retail}`} }:null,
       search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
+      search_provider>-1?{providers_id: { [Op.eq]: `${search_provider}`} }:null,
       usvn_longtieng>-1?{products_ngonngu: { [Op.eq]: `${usvn_longtieng}`} }:null,
       search_abc.length===1?{products_name: { [Op.like]: `${search_abc}%`} }:null,
     ]
