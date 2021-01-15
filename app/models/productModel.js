@@ -58,6 +58,9 @@ module.exports = (sequelize, Sequelize) => {
       products_retail: {
         type: Sequelize.STRING
       },
+      weight: {
+        type: Sequelize.INTEGER
+      },
       products_description: {
         type: Sequelize.STRING
       }

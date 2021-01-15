@@ -2,19 +2,33 @@ const db = require("../models");
 const Product = db.products;
 const Op = db.Sequelize.Op;
 
-
 // Retrieve all products only by ABC  from the database and count All
 exports.findABCAndCountAll = (req, res) => {
-  console.log('hihihi we are here product ABC and more ... ');
+  console.log('we are here FIND ABC and more ... ');
   let limit = 20;   // number of records per page
   let offset = 0;
 
   // chuyen thanh keyword noi chung, khong con tim theo NAME ma thoi
   const search_abc = req.query.search_abc;
-
-  console.log('abc : ' + search_abc);
+  const products_status = req.query.products_status?req.query.products_status:0;
   
-  var condition = {products_name: { [Op.like]: `${search_abc}%`} }
+  console.log('abc and products_status: ' + search_abc + ' ' + products_status);
+  
+  // var condition = {products_name: 
+  //   { 
+  //     [Op.like]: `${search_abc}%`
+  //   } 
+  // }
+
+  var condition = 
+  {
+    [Op.and]: [
+      {products_name: { [Op.like]: `${search_abc}%`} }, 
+      {products_status: { [Op.eq]: `${products_status}`} }, 
+    ]
+  } 
+  ;
+
 
   console.log('dk ne: ' + JSON.stringify(condition));
 
@@ -48,7 +62,6 @@ exports.findABCAndCountAll = (req, res) => {
     });
 };
 
-
 // Retrieve all products by condition (search, retail, longtieng, category) from the database and count All
 exports.findAndCountAll = (req, res) => {
   console.log('hihihi we are here product count alllllllllllllllll');
@@ -63,6 +76,7 @@ exports.findAndCountAll = (req, res) => {
   var search_provider = req.query.search_provider;
   var search_retail = req.query.search_retail;
   var usvn_longtieng = req.query.usvn_longtieng;
+  var products_status = req.query.products_status?req.query.products_status:0;
   
 
   console.log('keyword : ' + search_keyword);
@@ -79,6 +93,7 @@ exports.findAndCountAll = (req, res) => {
       {products_name_en: { [Op.like]: `%${search_keyword}%`} }, 
     ],
     [Op.and]: [
+      {products_status:  { [Op.eq]: `${products_status}`}},
       search_retail>-1?{products_retail: { [Op.eq]: `${search_retail}`} }:null,
       search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
       search_provider>-1?{providers_id: { [Op.eq]: `${search_provider}`} }:null,
@@ -88,14 +103,16 @@ exports.findAndCountAll = (req, res) => {
     ]
   } : 
   {
-    [Op.and]: [
-      search_retail>-1?{products_retail: { [Op.eq]: `${search_retail}`} }:null,
-      search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
-      search_provider>-1?{providers_id: { [Op.eq]: `${search_provider}`} }:null,
-      usvn_longtieng>-1?{products_ngonngu: { [Op.eq]: `${usvn_longtieng}`} }:null,
-      search_abc.length===1?{products_name: { [Op.like]: `${search_abc}%`} }:null,
-    ]
-  } ;
+      [Op.and]: [
+        {products_status:  { [Op.eq]: `${products_status}`}},
+        search_retail>-1?{products_retail: { [Op.eq]: `${search_retail}`} }:null,
+        search_category>-1?{categories_id: { [Op.eq]: `${search_category}`} }:null,
+        search_provider>-1?{providers_id: { [Op.eq]: `${search_provider}`} }:null,
+        usvn_longtieng>-1?{products_ngonngu: { [Op.eq]: `${usvn_longtieng}`} }:null,
+        search_abc.length===1?{products_name: { [Op.like]: `${search_abc}%`} }:null,
+      ]
+  } 
+  ;
 
   console.log('dk ne: ' + JSON.stringify(condition));
 
@@ -219,7 +236,14 @@ exports.findAll = (req, res) => {
 
     //console.log('condition la  ' + condition);
 
-    Product.findAll({ where: condition })
+    Product.findAll({
+      where: condition,
+      include: [
+        {model: db.categories},
+        {model: db.providers}
+      ],
+      nest:false,
+    })
       .then(data => {
         res.send(data);
       })
