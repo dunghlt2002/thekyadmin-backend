@@ -259,7 +259,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const products_id = req.params.products_id;
 
-  Product.findByPk(products_id)
+  Product.findByPk(products_id, {
+    include: [
+      {model: db.categories},
+      {model: db.providers}
+    ],
+    nest:false
+  })
     .then(data => {
       res.send(data);
     })
