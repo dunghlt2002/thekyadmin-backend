@@ -1,6 +1,6 @@
 // generate token using secret from process.env.JWT_SECRET
 var jwt = require('jsonwebtoken');
-var jwt_secret = process.env.JWT_SECRET
+// var jwt_secret = process.env.JWT_SECRET
 
 // tam khong xai 0717
 function tokenverify (user,checktoken ) {
