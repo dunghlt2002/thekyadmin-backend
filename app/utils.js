@@ -15,7 +15,7 @@ function tokenverify (user,checktoken ) {
 
     // jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
     // jwt.verify(onlyToken, '123dung', (err, decode) => {
-    jwt.verify(onlyToken, process.env.JWT_SECRET, (err, decode) => {
+    jwt.verify(onlyToken, '123dung', (err, decode) => {
       if (err) {
         // return res.status(401).send({ msg: 'Invalid Token' });
         return {msg: 'false'}
@@ -66,7 +66,7 @@ function generateToken(user) {
   
 //   return jwt.sign(u, process.env.JWT_SECRET, {
   // return jwt.sign(u, '123dung', {
-  return jwt.sign(u, process.env.JWT_SECRET, {
+  return jwt.sign(u, '123dung', {
     // expiresIn: 60 * 60 * 12 // expires in 24 hours
     expiresIn: 60 * 3 * 1 // expires in 24 hours
   });

@@ -15,7 +15,7 @@ verifyToken = (req, res, next) => {
   }
 
   // jwt.verify(token, config.secret, (err, decoded) => {
-  jwt.verify(token.slice(7, token.length), process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token.slice(7, token.length), '123dung', (err, decoded) => {
     console.log('hi vo verify');
     
     if (err) {
