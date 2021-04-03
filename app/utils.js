@@ -1,5 +1,6 @@
 // generate token using secret from process.env.JWT_SECRET
 var jwt = require('jsonwebtoken');
+var jwt_secret = process.env.JWT_SECRET
 
 // tam khong xai 0717
 function tokenverify (user,checktoken ) {
@@ -13,7 +14,8 @@ function tokenverify (user,checktoken ) {
     // console.log('only ' + onlyToken);
 
     // jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
-    jwt.verify(onlyToken, '123dung', (err, decode) => {
+    // jwt.verify(onlyToken, '123dung', (err, decode) => {
+    jwt.verify(onlyToken, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         // return res.status(401).send({ msg: 'Invalid Token' });
         return {msg: 'false'}
@@ -63,9 +65,10 @@ function generateToken(user) {
   console.log('u khuc giua la  ' + JSON.stringify(u));
   
 //   return jwt.sign(u, process.env.JWT_SECRET, {
-  return jwt.sign(u, '123dung', {
+  // return jwt.sign(u, '123dung', {
+  return jwt.sign(u, process.env.JWT_SECRET, {
     // expiresIn: 60 * 60 * 12 // expires in 24 hours
-    expiresIn: 60 * 60 * 1 // expires in 24 hours
+    expiresIn: 60 * 3 * 1 // expires in 24 hours
   });
 }
 
