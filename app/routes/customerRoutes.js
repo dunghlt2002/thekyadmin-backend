@@ -35,6 +35,9 @@ module.exports = app => {
     // Retrieve a single Customer with email
     router.get("/customerbyemail/:customers_email", customers.findOneByEmail);
 
+    // customers_passwordtoken
+    router.get("/resetpasswordrequest/:customers_email", customers.resetPasswordRequest);
+
     // Update a Tutorial with id
     router.put("/customers/:customers_id", customers.update);
 

@@ -37,6 +37,12 @@ module.exports = (sequelize, Sequelize) => {
       customers_phone: {
         type: Sequelize.STRING
       },
+      customers_passwordtoken: {
+        type: Sequelize.STRING
+      },
+      customers_passwordtokenexpires: {
+        type: Sequelize.STRING
+      },
       chutcheo_city: {
         type: Sequelize.BOOLEAN
       }

@@ -1,6 +1,37 @@
 const db = require("../models");
 const Customer = db.customers;
 const Op = db.Sequelize.Op;
+var crypto = require('crypto');
+
+// reset password request, update temporary token in customer TABLE
+// THU 4/6/2021
+exports.resetPasswordRequest = (req, res) => {
+  
+  const customers_email = req.params.customers_email;
+
+  Customer.findOne({ where: { customers_email: customers_email } })
+    .then(data => {
+              
+              if (data === null) {
+                console.log('email not in DB');
+                // res.status(403).send('email not in DB');
+                // res.send(data);
+              } else {
+                const token = crypto.randomBytes(6).toString('hex');
+                data.update({
+                  customers_passwordtoken: token,
+                });
+              }
+              res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving customers."
+      });
+    });
+};
+
 
 // const jwt = require('jsonwebtoken');
 const utils = require('../utils');
@@ -193,6 +224,8 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   
   const customers_id = req.params.customers_id;
+  console.log('vo update for customer ' + customers_id);
+  console.log(req.body);
   
   // van de o cho, khi update Sequelize tu qui dinh co column updatedAt trong table
   
